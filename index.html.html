@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lavô — Lavanderia com retirada e entrega</title>
+<style>
+:root{color-scheme:light;--bg:#f4fafc;--card:#fff;--ink:#12303a;--mut:#5a7680;--pri:#0b8aa8;--pri2:#065f75;--acc:#ffb703;--line:#d6e8ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0c1a20;--card:#13262e;--ink:#e6f3f7;--mut:#9bb6bf;--pri:#3cc3e0;--pri2:#8fdcee;--acc:#ffc93c;--line:#24404b}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0c1a20;--card:#13262e;--ink:#e6f3f7;--mut:#9bb6bf;--pri:#3cc3e0;--pri2:#8fdcee;--acc:#ffc93c;--line:#24404b}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:1000px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;flex-wrap:wrap}
+.logo{font-weight:800;font-size:1.4rem;color:var(--pri)}
+nav a{color:var(--ink);text-decoration:none;margin-left:14px;font-size:.92rem}
+.hero{padding:56px 0 40px;text-align:center}
+.hero h1{font-size:clamp(1.8rem,5vw,2.9rem);line-height:1.15;margin:0 0 14px}
+.hero p{max-width:640px;margin:0 auto 24px;color:var(--mut);font-size:1.1rem}
+.btn{display:inline-block;background:var(--pri);color:#fff;border:0;padding:13px 26px;border-radius:999px;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none}
+:root[data-theme="dark"] .btn{color:#06222b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#06222b}}
+.btn.alt{background:var(--acc);color:#2b1d00}
+section{padding:44px 0}
+h2{font-size:1.7rem;margin:0 0 8px}
+.sub{color:var(--mut);margin:0 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card h3{margin:6px 0;font-size:1.1rem}
+.card p{margin:0;color:var(--mut);font-size:.95rem}
+.ic{font-size:1.8rem}
+.price{color:var(--pri2);font-weight:700;margin-top:8px;display:block}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:20px}
+.stat{text-align:center;padding:16px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.stat b{display:block;font-size:1.6rem;color:var(--pri)}
+.demo{display:grid;grid-template-columns:1.3fr 1fr;gap:18px}
+@media (max-width:760px){.demo{grid-template-columns:1fr}}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.row:last-child{border:0}
+.row small{color:var(--mut);display:block}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:1.1rem;cursor:pointer}
+.qty span{min-width:22px;text-align:center;font-weight:700}
+.opt{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.opt label{flex:1;min-width:120px;border:1px solid var(--line);border-radius:12px;padding:10px;cursor:pointer;font-size:.9rem;background:var(--bg)}
+.opt input{margin-right:6px}
+.tot{font-size:2rem;font-weight:800;color:var(--pri)}
+.sum li{margin:4px 0;color:var(--mut);font-size:.92rem}
+.sum ul{padding-left:18px;margin:8px 0}
+form{display:grid;gap:14px;max-width:560px}
+label.f{display:grid;gap:5px;font-weight:600;font-size:.92rem}
+input[type=text],input[type=email],select,textarea{font:inherit;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.msg{padding:12px;border-radius:12px;background:var(--card);border:1px solid var(--pri);display:none}
+.inv{background:var(--card);border-radius:20px;border:1px solid var(--line);padding:26px}
+.inv li{margin:8px 0}
+footer{padding:30px 0 40px;color:var(--mut);text-align:center;border-top:1px solid var(--line);font-size:.9rem}
+</style>
+</head>
+<body>
+<header><div class="w"><nav>
+<span class="logo">🫧 Lavô</span>
+<div><a href="#servicos">Serviços</a><a href="#diferenciais">Diferenciais</a><a href="#demo">Simulador</a><a href="#investir">Investir</a><a href="#contato">Contato</a></div>
+</nav></div></header>
+
+<main>
+<div class="w hero">
+<h1>Roupa limpa, cheirosa e na sua porta.<br>Sem fila, sem tanque, sem perder seu fim de semana.</h1>
+<p>A Lavô é uma lavanderia com retirada e entrega em domicílio, pedido pelo celular e acompanhamento em tempo real, feita para quem não tem tempo, espaço ou paciência para lavar roupa.</p>
+<a class="btn" href="#demo">Simular meu pedido</a> <a class="btn alt" href="#contato">Quero receber novidades</a>
+</div>
+
+<section id="sobre"><div class="w">
+<h2>Sobre a Lavô</h2>
+<p class="sub">Nascemos em Antônio Prado (RS) para resolver uma dor comum: famílias, estudantes, trabalhadores e idosos que gastam horas por semana com roupa e acabam sem opção prática na região.</p>
+<div class="grid">
+<div class="card"><div class="ic">🎯</div><h3>Missão</h3><p>Devolver tempo às pessoas, cuidando das roupas com qualidade, pontualidade e preço justo.</p></div>
+<div class="card"><div class="ic">👥</div><h3>Público-alvo</h3><p>Famílias com rotina corrida, universitários, profissionais, idosos, pousadas e pequenos comércios da Serra Gaúcha.</p></div>
+<div class="card"><div class="ic">💡</div><h3>Modelo de negócio</h3><p>Receita por peso e por peça, planos mensais por assinatura e contratos com empresas (B2B).</p></div>
+</div></div></section>
+
+<section id="servicos"><div class="w">
+<h2>Nossos serviços</h2>
+<p class="sub">Valores iniciais de referência para a fase de lançamento.</p>
+<div class="grid">
+<div class="card"><div class="ic">👕</div><h3>Lavar e secar (por kg)</h3><p>Roupas do dia a dia, separadas por cor e tecido, com sabão hipoalergênico.</p><span class="price">a partir de R$ 9,90/kg</span></div>
+<div class="card"><div class="ic">🧺</div><h3>Lavar e passar</h3><p>Peças prontas para o guarda-roupa, dobradas ou em cabide.</p><span class="price">a partir de R$ 4,50/peça</span></div>
+<div class="card"><div class="ic">🛏️</div><h3>Cama, mesa e banho</h3><p>Edredons, cobertores, cortinas e tapetes com lavagem especial.</p><span class="price">a partir de R$ 35,00</span></div>
+<div class="card"><div class="ic">🧥</div><h3>Lavagem a seco</h3><p>Ternos, vestidos, casacos e peças delicadas.</p><span class="price">a partir de R$ 28,00</span></div>
+<div class="card"><div class="ic">🚚</div><h3>Retirada e entrega</h3><p>Buscamos e devolvemos em horário combinado. Grátis em pedidos acima de R$ 60.</p><span class="price">taxa R$ 8,00 abaixo disso</span></div>
+<div class="card"><div class="ic">📅</div><h3>Planos mensais</h3><p>Assinatura com kg incluso, coleta semanal e desconto progressivo.</p><span class="price">a partir de R$ 89,00/mês</span></div>
+</div></div></section>
+
+<section id="diferenciais"><div class="w">
+<h2>Benefícios e diferenciais</h2>
+<p class="sub">O que nos separa da lavanderia tradicional e do tanque de casa.</p>
+<div class="grid">
+<div class="card"><div class="ic">📱</div><h3>Pedido em 1 minuto</h3><p>Escolha, agende e acompanhe pelo celular, sem ligar nem esperar atendimento.</p></div>
+<div class="card"><div class="ic">⏱️</div><h3>Prazo claro</h3><p>Entrega em 48 h ou opção expressa em 24 h, com aviso a cada etapa.</p></div>
+<div class="card"><div class="ic">🌱</div><h3>Sustentável</h3><p>Máquinas econômicas, reuso de água e produtos biodegradáveis.</p></div>
+<div class="card"><div class="ic">🛡️</div><h3>Garantia Lavô</h3><p>Se a peça voltar com mancha ou dano nosso, relavamos ou ressarcimos.</p></div>
+</div>
+<div class="stats">
+<div class="stat"><b>~4 h</b>economizadas por semana por família</div>
+<div class="stat"><b>24 h</b>opção expressa</div>
+<div class="stat"><b>R$ 0</b>entrega acima de R$ 60</div>
+<div class="stat"><b>100%</b>satisfação ou relavagem</div>
+</div></div></section>
+
+<section id="demo"><div class="w">
+<h2>Demonstração: simulador de pedido (MVP)</h2>
+<p class="sub">Monte um pedido, veja o preço e o prazo na hora. É assim que o cliente usará o app da Lavô.</p>
+<div class="demo">
+<div class="card" id="items"></div>
+<div class="card">
+<b>Velocidade</b>
+<div class="opt">
+<label><input type="radio" name="sp" value="0" checked>Normal (48 h)</label>
+<label><input type="radio" name="sp" value="0.3">Expresso (24 h) +30%</label>
+</div>
+<b>Entrega</b>
+<div class="opt">
+<label><input type="radio" name="dl" value="home" checked>Retirada e entrega</label>
+<label><input type="radio" name="dl" value="shop">Eu levo e busco</label>
+</div>
+<div class="sum" id="sum"></div>
+<div class="tot" id="tot">R$ 0,00</div>
+<p id="eta" style="color:var(--mut);margin:4px 0 14px"></p>
+<button class="btn" id="go" type="button">Quero este pedido</button>
+</div>
+</div></div></section>
+
+<section id="investir"><div class="w">
+<h2>Por que investir na Lavô</h2>
+<div class="inv"><ul>
+<li><b>Mercado recorrente:</b> lavar roupa é uma necessidade semanal, o que gera receita previsível, principalmente com assinaturas.</li>
+<li><b>Pouca concorrência local:</b> poucas opções com delivery e acompanhamento digital na Serra Gaúcha.</li>
+<li><b>Operação enxuta:</b> começamos com 2 máquinas industriais, 1 veículo e 4 colaboradores, com escala gradual.</li>
+<li><b>Receitas diversificadas:</b> venda avulsa, planos mensais e contratos B2B com pousadas, hotéis, restaurantes e clínicas.</li>
+<li><b>Gestão por dados:</b> o app registra pedidos, prazos e recompra, permitindo ajustar preços e rotas.</li>
+<li><b>Potencial de expansão:</b> modelo replicável em cidades vizinhas por pontos de coleta e franquias.</li>
+</ul></div></div></section>
+
+<section id="contato"><div class="w">
+<h2>Fale com a gente</h2>
+<p class="sub">Deixe seus dados e avise o que você procura. Retornamos em breve.</p>
+<form id="lead">
+<label class="f">Nome<input type="text" id="n" required placeholder="Seu nome completo"></label>
+<label class="f">E-mail<input type="email" id="e" required placeholder="voce@email.com"></label>
+<label class="f">Interesse<select id="i">
+<option>Quero ser cliente (uso pessoal)</option>
+<option>Plano mensal</option>
+<option>Serviço para empresa / pousada</option>
+<option>Quero investir ou ser parceiro</option>
+<option>Apenas conhecer</option>
+</select></label>
+<label class="f">Mensagem (opcional)<textarea id="m" rows="3"></textarea></label>
+<button class="btn" type="submit">Enviar</button>
+<div class="msg" id="ok"></div>
+</form></div></section>
+</main>
+
+<footer><div class="w">🫧 Lavô Lavanderia · Antônio Prado, RS · Projeto acadêmico de empreendedorismo digital.<br>Preços e dados ilustrativos de simulação.</div></footer>
+
+<script>
+var ITEMS=[
+{n:"Roupas do dia a dia",u:"kg",p:9.9,q:0},
+{n:"Peças passadas",u:"peça",p:4.5,q:0},
+{n:"Edredom / cobertor",u:"unid.",p:35,q:0},
+{n:"Terno / vestido (a seco)",u:"peça",p:28,q:0},
+{n:"Tapete pequeno",u:"unid.",p:45,q:0}
+];
+function brl(v){return "R$ "+v.toFixed(2).replace(".",",")}
+var box=document.getElementById("items");
+ITEMS.forEach(function(it,k){
+var r=document.createElement("div");r.className="row";
+r.innerHTML='<div>'+it.n+'<small>'+brl(it.p)+' / '+it.u+'</small></div><div class="qty"><button type="button" aria-label="menos">−</button><span>0</span><button type="button" aria-label="mais">+</button></div>';
+var b=r.querySelectorAll("button"),s=r.querySelector("span");
+b[0].onclick=function(){if(it.q>0){it.q--;s.textContent=it.q;calc()}};
+b[1].onclick=function(){it.q++;s.textContent=it.q;calc()};
+box.appendChild(r)});
+var resumo="";
+function val(n){return document.querySelector('input[name="'+n+'"]:checked').value}
+function calc(){
+var sub=0,li="";
+ITEMS.forEach(function(it){if(it.q){var t=it.q*it.p;sub+=t;li+="<li>"+it.q+" "+it.u+" · "+it.n+": "+brl(t)+"</li>"}});
+var ex=parseFloat(val("sp")),home=val("dl")==="home";
+var add=sub*ex,fee=(home&&sub>0&&sub<60)?8:0,tot=sub+add+fee;
+if(add)li+="<li>Expresso: "+brl(add)+"</li>";
+if(fee)li+="<li>Taxa de entrega: "+brl(fee)+"</li>";
+if(home&&sub>=60)li+="<li>Entrega grátis 🎉</li>";
+document.getElementById("sum").innerHTML=li?"<ul>"+li+"</ul>":"<p style='color:var(--mut)'>Adicione itens para simular.</p>";
+document.getElementById("tot").textContent=brl(tot);
+var eta=document.getElementById("eta");
+if(!sub){eta.textContent="";resumo=""}else{
+var d=new Date();d.setDate(d.getDate()+(ex?1:2));
+eta.textContent="Pronto até "+d.toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"2-digit"});
+resumo="Simulação: "+brl(tot)+" ("+(ex?"expresso":"normal")+", "+(home?"com entrega":"sem entrega")+")"}}
+document.querySelectorAll('input[type=radio]').forEach(function(r){r.onchange=calc});
+calc();
+document.getElementById("go").onclick=function(){
+document.getElementById("m").value=resumo||"";
+document.getElementById("i").selectedIndex=0;
+document.getElementById("contato").scrollIntoView();
+document.getElementById("n").focus()};
+
+var db=null;
+(async function(){try{if(window.claude&&claude.use){db=await claude.use("db")}}catch(e){db=null}})();
+document.getElementById("lead").onsubmit=async function(ev){
+ev.preventDefault();
+var lead={nome:document.getElementById("n").value.trim(),email:document.getElementById("e").value.trim(),interesse:document.getElementById("i").value,mensagem:document.getElementById("m").value.trim(),data:new Date().toISOString()};
+var ok=document.getElementById("ok"),saved=false;
+try{if(db){await db.collection("leads").doc("l"+Date.now()).set(lead);saved=true}}catch(e){}
+if(!saved){try{var a=JSON.parse(localStorage.getItem("leads")||"[]");a.push(lead);localStorage.setItem("leads",JSON.stringify(a))}catch(e){}}
+ok.style.display="block";
+ok.textContent="Obrigado, "+lead.nome.split(" ")[0]+"! Recebemos seu interesse e entraremos em contato pelo e-mail informado.";
+this.reset()};
+</script>
+</body>
+</html>
